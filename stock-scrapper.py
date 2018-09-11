@@ -45,8 +45,7 @@ petronas_total = 0
 sime_darby_total = 0
 grand_total = 0
 
-# delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
-delays = [0]
+delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
 
 def get_random_ua():
 
@@ -178,7 +177,7 @@ for company in companies:
 
             dt = datetime.datetime.strptime(date_value, '%d %B %Y')
             date_value = f'{dt.day}/{dt.month}/{dt.year}'
-            
+
             if not date_value:
                 continue
 
