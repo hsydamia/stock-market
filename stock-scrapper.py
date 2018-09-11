@@ -45,7 +45,8 @@ petronas_total = 0
 sime_darby_total = 0
 grand_total = 0
 
-delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
+# delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
+delays = [0]
 
 def get_random_ua():
 
@@ -211,22 +212,22 @@ for company in companies:
             body_div = article_page.find('div', {'class': 'field field-name-body field-type-text-with-summary field-label-hidden'})
             
             if not body_div:
-                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
+                logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
                 continue
 
             body_div = body_div.find('div', {'class': 'field-items'})
             if not body_div:
-                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
+                logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
                 continue
 
             body_div = body_div.find('div', {'class': 'field-item even'})
             if not body_div:
-                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
+                logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
                 continue
 
             body_p = body_div.findAll('p');
             if not body_p:
-                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
+                logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
                 continue
 
             body_text = ""
