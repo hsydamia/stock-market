@@ -36,6 +36,8 @@ grand_total = 0
 delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
 
 def get_random_ua():
+
+    # get random user agent from user-agents.txt file
     random_ua = ''
     ua_file = 'user-agents.txt'
     try:
@@ -45,26 +47,26 @@ def get_random_ua():
             prng = np.random.RandomState()
             index = prng.permutation(len(lines) - 1)
             idx = np.asarray(index, dtype=np.integer)[0]
-            random_proxy = lines[int(idx)]
+            random_ua = lines[int(idx)]
     except Exception as ex:
         print('Exception in random_ua')
         print(str(ex))
     finally:
-        return random_ua
+        return random_ua.replace('\n', '')
 
 def go_to_link(url, referer, company, count = None):
 
     # add random delay between request
+    # add your delay value (in second) to above delays array
     delay = np.random.choice(delays)
-    logging(company, url + ' : delay ' + str(delay) + ' second(s)', count)
+    logging(company, url + ' : Delay for ' + str(delay) + ' second(s)', count)
     time.sleep(delay)
 
-    # use random user agents, set referer as previous page.
+    # use random user agents, set previous page as referer
     headers = {
         'User-Agent': get_random_ua(),
         'referer': referer
     }
-
     req = Request(url, headers=headers)
     page_html = urlopen(req).read()
 
@@ -72,6 +74,7 @@ def go_to_link(url, referer, company, count = None):
 
 def logging(company, text, count = None):
 
+    # simplify logging
     if count is not None:
         company = company.upper() + '(' + str(count+1) + ')'
     else:
@@ -80,6 +83,8 @@ def logging(company, text, count = None):
     print(company + ' : ' + text)
 
 def set_company_total(company, total):
+
+    # set total for summary
     global maybank_total
     global axiata_total
     global cimb_total
@@ -100,8 +105,19 @@ def set_company_total(company, total):
 
     grand_total = grand_total + total
 
+def print_summary():
+    print('------- SUMMARY OF TOTAL ARTICLES SCRAPPED -------')
+    print(' MAYBANK : ' + str(maybank_total))
+    print(' AXIATA : ' + str(axiata_total))
+    print(' CIMB : ' + str(cimb_total))
+    print(' PETRONAS : ' + str(petronas_total))
+    print(' SIME DARBY : ' + str(sime_darby_total))
+    print('')
+    print(' GRAND TOTAL : ' + str(grand_total))
+    print('--------------------------------------------')
+
 for company in companies:
-    logging(company, '------- START SCRAPPING -------')
+    logging(company, '------- START -------')
     terminate = False
 
     company_dict = {}
@@ -191,7 +207,7 @@ for company in companies:
             }
 
             company_dict[index] = data_dict
-            logging(company, base_url + article_url + ' : DONE', index)
+            logging(company, base_url + article_url + ' : SCRAPPED', index)
             print("")
 
             index += 1
@@ -201,16 +217,10 @@ for company in companies:
     file.write(data_to_write)
     file.close()
     set_company_total(company, index)
-    logging(company, 'TOTAL OF ' + str(index) + ' ARTICLES SCRAPPED' )
-    logging(company, '------- SCRAP ENDED -------')
+    logging(company, str(index) + ' article(s) scrapped' )
+    logging(company, 'File saved as : ' + company.replace(" ", "-") + '-data.json' )
+    logging(company, '------- ENDED -------')
+    print("")
     print("")
 
-print('------- SUMMARY OF ARTICLES SCRAPPED -------')
-print(' MAYBANK : ' + str(maybank_total))
-print(' AXIATA : ' + str(axiata_total))
-print(' CIMB : ' + str(cimb_total))
-print(' PETRONAS : ' + str(petronas_total))
-print(' SIME DARBY : ' + str(sime_darby_total))
-print('')
-print(' GRAND TOTAL : ' + str(grand_total))
-print('--------------------------------------------')
+print_summary()
