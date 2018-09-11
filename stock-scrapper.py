@@ -1,9 +1,11 @@
 from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup as soup
 import re
 import json
 import numpy as np
 import time
+import datetime
 
 # add to replace non ascii char
 # replace("/\u2013|\u2014/g", "-").replace("/\u2019s", "'")
@@ -68,9 +70,18 @@ def go_to_link(url, referer, company, count = None):
         'referer': referer
     }
     req = Request(url, headers=headers)
-    page_html = urlopen(req).read()
 
-    return soup(page_html,"html.parser")
+    try:
+        response = urlopen(req)
+        page_html = response.read()
+        
+        return soup(page_html,"html.parser")
+    except HTTPError as e:
+        logging(company, url + ' : ERROR! (HttpError,' + str(e.code) + ')')
+    except URLError as e:
+        logging(company, url + ' : ERROR! (URLError,' + str(e.reason) + ')')
+
+    return False
 
 def logging(company, text, count = None):
 
@@ -132,6 +143,10 @@ for company in companies:
         search_url = base_url + "/search-results?page=" + str(page) + "&keywords=" + company.replace(' ', '+') + "+stock"
         search_page = go_to_link(search_url, base_url, company)
         print("")
+
+        if search_page is False:
+            continue
+
         rows = search_page.findAll("div",{"class":"views-row"})
         
         for row in rows:
@@ -141,15 +156,18 @@ for company in companies:
             date_posted = date_div.find('span', {'class': 'field-content'})
 
             if not date_posted:
-                break
+                continue
 
             date_array = date_posted.text.split(" ")
 
             del date_array[0]
-            date_value = "".join(date_array)
+            date_value = " ".join(date_array)
+
+            d = datetime.datetime.strptime(date_value, '%d %B %Y')
+            date_value = datetime.date.strftime(d, "%-d/%-m/%y")
 
             if not date_value:
-                break
+                continue
 
             year_posted = date_array[-1];
 
@@ -165,6 +183,9 @@ for company in companies:
             # in article page
             article_page = go_to_link(base_url + article_url, search_url, company, index)
 
+            if article_page is False:
+                continue
+
             # get article title
             title_div = article_page.find('div', {'class': 'post-title'})
             title = title_div.find('h1')
@@ -179,22 +200,22 @@ for company in companies:
             
             if not body_div:
                 logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
-                break
+                continue
 
             body_div = body_div.find('div', {'class': 'field-items'})
             if not body_div:
                 logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
-                break
+                continue
 
             body_div = body_div.find('div', {'class': 'field-item even'})
             if not body_div:
                 logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
-                break
+                continue
 
             body_p = body_div.findAll('p');
             if not body_p:
                 logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
-                break
+                continue
 
             body_text = ""
             for p in body_p:
