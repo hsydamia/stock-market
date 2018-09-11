@@ -10,6 +10,16 @@ import datetime
 # add to replace non ascii char
 # replace("/\u2013|\u2014/g", "-").replace("/\u2019s", "'")
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 base_url = "https://www.theedgemarkets.com"
 
 years = [
@@ -77,9 +87,9 @@ def go_to_link(url, referer, company, count = None):
         
         return soup(page_html,"html.parser")
     except HTTPError as e:
-        logging(company, url + ' : ERROR! (HttpError,' + str(e.code) + ')')
+        logging(company, bcolors.FAIL + url + ' : ERROR! (HttpError,' + str(e.code) + ')' + bcolors.ENDC)
     except URLError as e:
-        logging(company, url + ' : ERROR! (URLError,' + str(e.reason) + ')')
+        logging(company, bcolors.FAIL + url + ' : ERROR! (URLError,' + str(e.reason) + ')' + bcolors.ENDC)
 
     return False
 
@@ -117,7 +127,8 @@ def set_company_total(company, total):
     grand_total = grand_total + total
 
 def print_summary():
-    print('------- SUMMARY OF TOTAL ARTICLES SCRAPPED -------')
+    print(bcolors.BOLD + '------- SUMMARY OF TOTAL ARTICLES SCRAPPED -------')
+    print(bcolors.OKBLUE)
     print(' MAYBANK : ' + str(maybank_total))
     print(' AXIATA : ' + str(axiata_total))
     print(' CIMB : ' + str(cimb_total))
@@ -125,10 +136,11 @@ def print_summary():
     print(' SIME DARBY : ' + str(sime_darby_total))
     print('')
     print(' GRAND TOTAL : ' + str(grand_total))
-    print('--------------------------------------------')
+    print(bcolors.ENDC)
+    print(bcolors.BOLD + '--------------------------------------------' + bcolors.ENDC)
 
 for company in companies:
-    logging(company, '------- START -------')
+    logging(company, bcolors.BOLD + '------- START -------' + bcolors.ENDC)
     terminate = False
 
     company_dict = {}
@@ -228,7 +240,7 @@ for company in companies:
             }
 
             company_dict[index] = data_dict
-            logging(company, base_url + article_url + ' : SCRAPPED', index)
+            logging(company, bcolors.OKGREEN + base_url + article_url + ' : SCRAPPED' + bcolors.ENDC, index)
             print("")
 
             index += 1
@@ -238,9 +250,9 @@ for company in companies:
     file.write(data_to_write)
     file.close()
     set_company_total(company, index)
-    logging(company, str(index) + ' article(s) scrapped' )
-    logging(company, 'File saved as : ' + company.replace(" ", "-") + '-data.json' )
-    logging(company, '------- ENDED -------')
+    logging(company, bcolors.HEADER + str(index) + ' article(s) scrapped' + bcolors.ENDC)
+    logging(company, bcolors.HEADER + 'File saved as : ' + company.replace(" ", "-") + '-data.json' + bcolors.ENDC )
+    logging(company, bcolors.BOLD + '------- ENDED -------' + bcolors.ENDC)
     print("")
     print("")
 
