@@ -10,10 +10,10 @@ base_url = "http://www.theedgemarkets.com"
 
 years = [
     "2018",
-    # "2017",
-    # "2016",
-    # "2015",
-    # "2014"
+    "2017",
+    "2016",
+    "2015",
+    "2014"
 ]
 
 companies = [
