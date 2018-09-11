@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup as soup
 import re
 import json
 import numpy as np
+import time
 
 # add to replace non ascii char
 # replace("/\u2013|\u2014/g", "-").replace("/\u2019s", "'")
 
-base_url = "http://www.theedgemarkets.com"
+base_url = "https://www.theedgemarkets.com"
 
 years = [
     "2018",
@@ -19,13 +20,20 @@ years = [
 
 companies = [
     "maybank",
-    # "axiata",
-    # "cimb",
-    # "petronas",
-    # "sime darby"
+    "axiata",
+    "cimb",
+    "petronas",
+    "sime darby"
 ]
 
-delays = [7, 4, 6, 2, 10, 19]
+maybank_total = 0
+axiata_total = 0
+cimb_total = 0
+petronas_total = 0
+sime_darby_total = 0
+grand_total = 0
+
+delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
 
 def get_random_ua():
     random_ua = ''
@@ -44,24 +52,17 @@ def get_random_ua():
     finally:
         return random_ua
 
-def go_to_link(url, referer):
+def go_to_link(url, referer, company, count = None):
 
     # add random delay between request
     delay = np.random.choice(delays)
+    logging(company, url + ' : delay ' + str(delay) + ' second(s)', count)
     time.sleep(delay)
 
     # use random user agents, set referer as previous page.
-    # add extra headers to mimic browser activity
     headers = {
         'User-Agent': get_random_ua(),
-        'referer': referer,
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'en-US,en;q=0.9,ms;q=0.8',
-        'cache-control': 'no-cache'
-        'dnt': '1'
-        'pragma': 'no-cache'
-        'upgrade-insecure-requests': '1'
+        'referer': referer
     }
 
     req = Request(url, headers=headers)
@@ -69,7 +70,38 @@ def go_to_link(url, referer):
 
     return soup(page_html,"html.parser")
 
+def logging(company, text, count = None):
+
+    if count is not None:
+        company = company.upper() + '(' + str(count+1) + ')'
+    else:
+        company = company.upper()
+
+    print(company + ' : ' + text)
+
+def set_company_total(company, total):
+    global maybank_total
+    global axiata_total
+    global cimb_total
+    global petronas_total
+    global sime_darby_total
+    global grand_total
+
+    if company == 'maybank':
+        maybank_total = total
+    elif company == 'petronas':
+        petronas_total = total
+    elif company == 'axiata':
+        axiata_total = total
+    elif company == 'cimb':
+        cimb_total = total
+    elif company == 'sime darby':
+        sime_darby_total = total
+
+    grand_total = grand_total + total
+
 for company in companies:
+    logging(company, '------- START SCRAPPING -------')
     terminate = False
 
     company_dict = {}
@@ -81,8 +113,9 @@ for company in companies:
         if terminate is True:
             break
 
-        search_url = base_url + "/search-results?page=" + str(page) + "&keywords=" + company + "+stock"
-        search_page = go_to_link(search_url, base_url)
+        search_url = base_url + "/search-results?page=" + str(page) + "&keywords=" + company.replace(' ', '+') + "+stock"
+        search_page = go_to_link(search_url, base_url, company)
+        print("")
         rows = search_page.findAll("div",{"class":"views-row"})
         
         for row in rows:
@@ -114,7 +147,7 @@ for company in companies:
             article_url = url_div.find('a')['href']
 
             # in article page
-            article_page = go_to_link(base_url + article_url, search_url)
+            article_page = go_to_link(base_url + article_url, search_url, company, index)
 
             # get article title
             title_div = article_page.find('div', {'class': 'post-title'})
@@ -129,18 +162,22 @@ for company in companies:
             body_div = article_page.find('div', {'class': 'field field-name-body field-type-text-with-summary field-label-hidden'})
             
             if not body_div:
+                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
                 break
 
             body_div = body_div.find('div', {'class': 'field-items'})
             if not body_div:
+                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
                 break
 
             body_div = body_div.find('div', {'class': 'field-item even'})
             if not body_div:
+                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
                 break
 
             body_p = body_div.findAll('p');
             if not body_p:
+                logging(company, base_url + article_url + ' : NO BODY, SKIPPED!', index)
                 break
 
             body_text = ""
@@ -154,13 +191,26 @@ for company in companies:
             }
 
             company_dict[index] = data_dict
-            index += 1
-            print(company_dict)
-            print(index)
+            logging(company, base_url + article_url + ' : DONE', index)
+            print("")
 
-# write to file
-data_to_write = json.dumps(company_dict)
-file.write(data_to_write)
-print(data_to_write.encode("utf-8"))
-print("")
-file.close()
+            index += 1
+
+    # write to file
+    data_to_write = json.dumps(company_dict)
+    file.write(data_to_write)
+    file.close()
+    set_company_total(company, index)
+    logging(company, 'TOTAL OF ' + str(index) + ' ARTICLES SCRAPPED' )
+    logging(company, '------- SCRAP ENDED -------')
+    print("")
+
+print('------- SUMMARY OF ARTICLES SCRAPPED -------')
+print(' MAYBANK : ' + str(maybank_total))
+print(' AXIATA : ' + str(axiata_total))
+print(' CIMB : ' + str(cimb_total))
+print(' PETRONAS : ' + str(petronas_total))
+print(' SIME DARBY : ' + str(sime_darby_total))
+print('')
+print(' GRAND TOTAL : ' + str(grand_total))
+print('--------------------------------------------')
