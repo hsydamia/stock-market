@@ -18,10 +18,10 @@ years = [
 
 companies = [
     "maybank",
-    "axiata",
-    "cimb",
-    "petronas",
-    "sime darby"
+    # "axiata",
+    # "cimb",
+    # "petronas",
+    # "sime darby"
 ]
 
 def go_to_link(url):
@@ -80,10 +80,12 @@ for company in companies:
 
             # get article title
             title_div = article_page.find('div', {'class': 'post-title'})
-            title = title_div.find('h1').text
+            title = title_div.find('h1')
 
             if not title:
                 title = "No title"
+            else:
+                title = title.text
 
             # get article body
             body_div = article_page.find('div', {'class': 'field field-name-body field-type-text-with-summary field-label-hidden'})
@@ -103,6 +105,7 @@ for company in companies:
 
             company_dict[index] = data_dict
             index += 1
+            print(company_dict)
             print(index)
 
 # write to file
