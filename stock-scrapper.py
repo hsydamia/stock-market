@@ -10,10 +10,10 @@ base_url = "http://www.theedgemarkets.com"
 
 years = [
     "2018",
-    "2017",
-    "2016",
-    "2015",
-    "2014"
+    # "2017",
+    # "2016",
+    # "2015",
+    # "2014"
 ]
 
 companies = [
@@ -89,9 +89,21 @@ for company in companies:
 
             # get article body
             body_div = article_page.find('div', {'class': 'field field-name-body field-type-text-with-summary field-label-hidden'})
+            
+            if not body_div:
+                break
+
             body_div = body_div.find('div', {'class': 'field-items'})
+            if not body_div:
+                break
+
             body_div = body_div.find('div', {'class': 'field-item even'})
+            if not body_div:
+                break
+
             body_p = body_div.findAll('p');
+            if not body_p:
+                break
 
             body_text = ""
             for p in body_p:
