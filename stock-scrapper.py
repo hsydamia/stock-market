@@ -2,6 +2,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup as soup
 import re
 import json
+import numpy as np
 
 # add to replace non ascii char
 # replace("/\u2013|\u2014/g", "-").replace("/\u2019s", "'")
@@ -24,9 +25,46 @@ companies = [
     # "sime darby"
 ]
 
-def go_to_link(url):
-    search_url = url
-    req = Request(search_url, headers={'User-Agent': 'Mozilla/5.0'})
+delays = [7, 4, 6, 2, 10, 19]
+
+def get_random_ua():
+    random_ua = ''
+    ua_file = 'user-agents.txt'
+    try:
+        with open(ua_file) as f:
+            lines = f.readlines()
+        if len(lines) > 0:
+            prng = np.random.RandomState()
+            index = prng.permutation(len(lines) - 1)
+            idx = np.asarray(index, dtype=np.integer)[0]
+            random_proxy = lines[int(idx)]
+    except Exception as ex:
+        print('Exception in random_ua')
+        print(str(ex))
+    finally:
+        return random_ua
+
+def go_to_link(url, referer):
+
+    # add random delay between request
+    delay = np.random.choice(delays)
+    time.sleep(delay)
+
+    # use random user agents, set referer as previous page.
+    # add extra headers to mimic browser activity
+    headers = {
+        'User-Agent': get_random_ua(),
+        'referer': referer,
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en;q=0.9,ms;q=0.8',
+        'cache-control': 'no-cache'
+        'dnt': '1'
+        'pragma': 'no-cache'
+        'upgrade-insecure-requests': '1'
+    }
+
+    req = Request(url, headers=headers)
     page_html = urlopen(req).read()
 
     return soup(page_html,"html.parser")
@@ -43,8 +81,8 @@ for company in companies:
         if terminate is True:
             break
 
-        url = base_url + "/search-results?page=" + str(page) + "&keywords=" + company + "+stock"
-        search_page = go_to_link(url)
+        search_url = base_url + "/search-results?page=" + str(page) + "&keywords=" + company + "+stock"
+        search_page = go_to_link(search_url, base_url)
         rows = search_page.findAll("div",{"class":"views-row"})
         
         for row in rows:
@@ -76,7 +114,7 @@ for company in companies:
             article_url = url_div.find('a')['href']
 
             # in article page
-            article_page = go_to_link(base_url + article_url)
+            article_page = go_to_link(base_url + article_url, search_url)
 
             # get article title
             title_div = article_page.find('div', {'class': 'post-title'})
