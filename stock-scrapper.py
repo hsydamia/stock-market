@@ -31,8 +31,8 @@ years = [
 ]
 
 companies = [
-    # "maybank",
-    # "axiata",
+    "maybank",
+    "axiata",
     "cimb",
     "petronas",
     "sime darby"
