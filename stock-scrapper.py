@@ -31,8 +31,8 @@ years = [
 ]
 
 companies = [
-    "maybank",
-    "axiata",
+    # "maybank",
+    # "axiata",
     "cimb",
     "petronas",
     "sime darby"
@@ -45,7 +45,8 @@ petronas_total = 0
 sime_darby_total = 0
 grand_total = 0
 
-delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
+# delays = [2, 4, 3, 5, 7, 9, 13, 19, 1, 9, 15, 10]
+delays = [0]
 
 def get_random_ua():
 
@@ -87,9 +88,11 @@ def go_to_link(url, referer, company, count = None):
         
         return soup(page_html,"html.parser")
     except HTTPError as e:
-        logging(company, bcolors.FAIL + url + ' : ERROR! (HttpError,' + str(e.code) + ')' + bcolors.ENDC)
+        logging(company, bcolors.FAIL + url + ' : ERROR! (HttpError,' + str(e.code) + ')' + bcolors.ENDC, count)
+        print('')
     except URLError as e:
-        logging(company, bcolors.FAIL + url + ' : ERROR! (URLError,' + str(e.reason) + ')' + bcolors.ENDC)
+        logging(company, bcolors.FAIL + url + ' : ERROR! (URLError,' + str(e.reason) + ')' + bcolors.ENDC, count)
+        print('')
 
     return False
 
@@ -156,8 +159,11 @@ for company in companies:
         search_page = go_to_link(search_url, base_url, company)
         print("")
 
-        if search_page is False:
-            continue
+        # if fail, wait 10 seconds and try again!
+        while search_page is False:
+            time.sleep(10)
+            search_page = go_to_link(search_url, base_url, company)
+            print("")
 
         rows = search_page.findAll("div",{"class":"views-row"})
         
@@ -195,8 +201,10 @@ for company in companies:
             # in article page
             article_page = go_to_link(base_url + article_url, search_url, company, index)
 
-            if article_page is False:
-                continue
+            # if fail, wait 10 seconds and try again!
+            while article_page is False:
+                time.sleep(10)
+                article_page = go_to_link(base_url + article_url, search_url, company, index)
 
             # get article title
             title_div = article_page.find('div', {'class': 'post-title'})
@@ -212,21 +220,25 @@ for company in companies:
             
             if not body_div:
                 logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
+                print('')
                 continue
 
             body_div = body_div.find('div', {'class': 'field-items'})
             if not body_div:
                 logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
+                print('')
                 continue
 
             body_div = body_div.find('div', {'class': 'field-item even'})
             if not body_div:
                 logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
+                print('')
                 continue
 
             body_p = body_div.findAll('p');
             if not body_p:
                 logging(company, bcolors.WARNING + base_url + article_url + ' : NO BODY, SKIPPED!' + bcolors.ENDC, index)
+                print('')
                 continue
 
             body_text = ""
