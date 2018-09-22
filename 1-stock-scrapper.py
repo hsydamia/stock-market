@@ -1,6 +1,7 @@
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup as soup
+from colors import bcolors
 import re
 import json
 import numpy as np
@@ -10,16 +11,6 @@ import os
 
 # add to replace non ascii char
 # replace("/\u2013|\u2014/g", "-").replace("/\u2019s", "'")
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 base_url = "https://www.theedgemarkets.com"
 

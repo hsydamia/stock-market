@@ -5,16 +5,7 @@ import itertools
 import threading
 import time
 import sys
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+from colors import bcolors
 
 companies = [
     "maybank",
@@ -39,10 +30,11 @@ def animate():
         time.sleep(0.1)
 
 for company in companies:
+	filename = company.replace(" ", "-") + "-data.json"
 	print(company.upper() + " : " + bcolors.WARNING + '------- START ANALYSE AND REMOVE DUPLICATE -------' + bcolors.ENDC)
 	t = threading.Thread(target=animate)
 	t.start()
-	with open('raw/' + company.replace(" ", "-") + '-data.json') as json_file:
+	with open('data/raw/' + filename) as json_file:
 		data = json.load(json_file)
 
 		# create directory
@@ -51,7 +43,6 @@ for company in companies:
 				os.makedirs(directory)
 		
 		# create file
-		filename = company.replace(" ", "-") + "-data.json"
 		cleaned_data_file = open("cleaned/" + filename, "w", encoding="utf-8")
 		dirty_data_file = open('dirty/' + filename, "w", encoding="utf-8")
 
@@ -61,7 +52,7 @@ for company in companies:
 		clean_index = 0
 		dirty_index = 0
 
-		#loop for key and value for json file
+		# loop for key and value for json file
 		for key_json, value_json in data.items():
 			for key_to_compared, value_to_compared in data.items():
 				if key_json != key_to_compared:
