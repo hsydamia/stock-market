@@ -31,4 +31,5 @@ def get_unicode_list():
         'uff63',  # halfwidth right corner bracket
         'u2014',
         'u00a0'
+        
     ]

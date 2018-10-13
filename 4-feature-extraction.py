@@ -1,4 +1,7 @@
 from colors import bcolors
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
 import unicode as unicode
 import json
 import os
@@ -23,6 +26,42 @@ directories = [
 def format_date_to_historical(date_value):
 	dt = datetime.datetime.strptime(date_value, '%d/%m/%Y')
 	return datetime.date.strftime(dt, "%Y-%m-%d")
+
+def remove_stopword(text):
+	ps = PorterStemmer()
+	stop_words = set(stopwords.words('english'))
+	words = word_tokenize(text)
+
+	new_text = ''
+	for word in words:
+		if not word in stop_words:
+			new_text = new_text + word + " "
+
+	return new_text
+
+def word_stemming(text):
+	ps = PorterStemmer()
+	words = word_tokenize(text)
+
+	new_text = ''
+	for word in words:
+		new_text = new_text + ps.stem(word) + " "
+
+	return new_text
+
+def remove_unicode(text):
+	for symbol in unicode.get_unicode_list():
+		text = re.sub(symbol, '', text).replace('\\', '')
+
+	return text
+
+def remove_punctuation(text):
+	punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+	no_punct = ""
+	for char in text:
+		if char not in punctuations:
+			no_punct = no_punct + char
+	return no_punct
 
 def print_summary():
 	print('')
@@ -79,9 +118,14 @@ for company in companies:
 					value_json['title'] = value_json['title'].lower()
 					value_json['article'] = value_json['article'].lower()
 
-					for symbol in unicode.get_unicode_list():
-						value_json['title'] = re.sub(symbol, '', value_json['title']).replace('\\', '')
-						value_json['article'] = re.sub(symbol, '', value_json['article']).replace('\\', '')
+					value_json['title'] = remove_unicode(value_json['title'])
+					value_json['article'] = remove_unicode(value_json['article'])
+					value_json['title'] = word_stemming(value_json['article'])
+					value_json['article'] = word_stemming(value_json['article'])
+					value_json['title'] = remove_stopword(value_json['article'])
+					value_json['article'] = remove_stopword(value_json['article'])
+					value_json['title'] = remove_punctuation(value_json['article'])
+					value_json['article'] = remove_punctuation(value_json['article'])
 
 					if (y == float(0)):
 						status = bcolors.OKBLUE + 'NEUTRAL' + bcolors.ENDC
