@@ -120,11 +120,11 @@ for company in companies:
 
 					value_json['title'] = remove_unicode(value_json['title'])
 					value_json['article'] = remove_unicode(value_json['article'])
-					value_json['title'] = word_stemming(value_json['article'])
+					value_json['title'] = word_stemming(value_json['title'])
 					value_json['article'] = word_stemming(value_json['article'])
-					value_json['title'] = remove_stopword(value_json['article'])
+					value_json['title'] = remove_stopword(value_json['title'])
 					value_json['article'] = remove_stopword(value_json['article'])
-					value_json['title'] = remove_punctuation(value_json['article'])
+					value_json['title'] = remove_punctuation(value_json['title'])
 					value_json['article'] = remove_punctuation(value_json['article'])
 
 					if (y == float(0)):
