@@ -112,6 +112,7 @@ def apriori(df, min_support=0.5, use_colnames=False, max_len=None, n_jobs=1):
         max_len = float('inf')
 
     while max_itemset and max_itemset < max_len:
+        print('masuk')
         next_max_itemset = max_itemset + 1
         combin = generate_new_combinations(itemset_dict[max_itemset])
         frequent_items = []
@@ -120,6 +121,7 @@ def apriori(df, min_support=0.5, use_colnames=False, max_len=None, n_jobs=1):
         if is_sparse:
             all_ones = np.ones((X.shape[0], next_max_itemset))
         for c in combin:
+            print('masuk 2')
             if is_sparse:
                 together = np.all(X[:, c] == all_ones, axis=1)
             else:
@@ -138,6 +140,7 @@ def apriori(df, min_support=0.5, use_colnames=False, max_len=None, n_jobs=1):
 
     all_res = []
     for k in sorted(itemset_dict):
+        print('masuk 3')
         support = pd.Series(support_dict[k])
         itemsets = pd.Series([frozenset(i) for i in itemset_dict[k]])
 

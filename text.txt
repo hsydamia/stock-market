@@ -1,0 +1,251 @@
+       0    034     04    053    057     06    087      1   127   1324    14     15    152     16  \
+0  False  False  False  False  False  False  False  False  True  False  True  False  False  False   
+1  False   True   True   True   True  False   True  False  True  False  True  False  False  False   
+2  False   True   True   True   True   True   True   True  True   True  True  False   True  False   
+3   True   True   True   True   True   True   True   True  True   True  True   True   True   True   
+
+    1800  184392  185706  186403   1870     19      2  200day  2011  2013  2014   2016   2018  \
+0  False   False   False   False  False  False  False   False  True  True  True  False  False   
+1  False   False    True   False  False  False  False   False  True  True  True  False   True   
+2   True    True    True    True   True   True  False    True  True  True  True   True   True   
+3   True    True    True    True   True   True   True    True  True  True  True   True   True   
+
+     21     22    225     26     27  2u00bdyear    30  30day     32     38     39     5     51  \
+0  True  False  False  False  False        True  True  False  False  False  False  True  False   
+1  True  False   True  False  False        True  True  False  False  False  False  True  False   
+2  True  False   True   True  False        True  True   True  False   True  False  True   True   
+3  True   True   True   True   True        True  True   True   True   True   True  True   True   
+
+     60     64   6549     69    697      9    901     91   abov  academ  acquisit  across  action  \
+0  True  False  False  False  False  False  False  False  False    True      True   False    True   
+1  True  False  False  False   True  False  False  False  False    True      True   False    True   
+2  True  False   True  False   True  False   True   True   True    True      True    True    True   
+3  True   True   True   True   True   True   True   True   True    True      True    True    True   
+
+   activ    ad  administr  advic  advis  affect    ago  allow   also  aluminium  analysi  analyst  \
+0   True  True      False  False   True    True  False   True  False      False    False    False   
+1   True  True       True  False   True    True  False   True   True      False    False    False   
+2   True  True       True   True   True    True   True   True   True       True     True    False   
+3   True  True       True   True   True    True   True   True   True       True     True     True   
+
+     ani  announc  appeal  appear  appetit  applic  april  areca  articl   asia  asian   asid  \
+0  False     True    True    True    False    True   True  False    True  False  False  False   
+1  False     True    True    True     True    True   True   True    True   True   True   True   
+2   True     True    True    True     True    True   True   True    True   True   True   True   
+3   True     True    True    True     True    True   True   True    True   True   True   True   
+
+   august  averag  award  axiata  azmi  back   band   bank  barrel  bearish   beat  befor   bhd  \
+0    True   False   True   False  True  True  False  False   False    False  False  False  True   
+1    True   False   True    True  True  True  False  False   False    False  False  False  True   
+2    True    True   True    True  True  True   True   True    True     True   True   True  True   
+3    True    True   True    True  True  True   True   True    True     True   True   True  True   
+
+   biggest  billion  board  break  brent  brush  bullish  bursa    buy  buyer  capit  capitalis  \
+0    False     True  False  False  False  False    False   True  False  False  False       True   
+1    False     True  False  False  False   True    False   True  False  False   True       True   
+2     True     True   True   True   True   True     True   True   True   True   True       True   
+3     True     True   True   True   True   True     True   True   True   True   True       True   
+
+   chief  china  chines  chow    cia  climb  close  cloud  come  comex  commentari  commerci  \
+0  False  False   False  True  False  False   True  False  True  False       False      True   
+1   True   True    True  True   True  False   True  False  True  False       False      True   
+2   True   True    True  True   True   True   True   True  True   True        True      True   
+3   True   True    True  True   True   True   True   True  True   True        True      True   
+
+   commiss  commod  compani  compar  compel  composit  concern  conglomer  consensu  consent  \
+0     True   False     True   False    True     False    False       True     False     True   
+1     True   False     True   False    True      True     True       True     False     True   
+2     True    True     True    True    True      True     True       True     False     True   
+3     True    True     True    True    True      True     True       True      True     True   
+
+   constru  consult  contend  continu  contributor  converg   corp  corpor  correct  cost  court  \
+0    False    False     True     True        False    False  False    True    False  True   True   
+1    False    False     True     True        False    False   True    True    False  True   True   
+2     True     True     True     True         True     True   True    True     True  True   True   
+3     True     True     True     True         True     True   True    True     True  True   True   
+
+   crude    cue  current  dagangan  daili  danni  darbi   data  datuk  decemb  decis  declin  \
+0  False  False    False     False   True  False   True  False   True    True   True   False   
+1  False   True    False     False   True   True   True   True   True    True   True    True   
+2   True   True     True      True   True   True   True   True   True    True   True    True   
+3   True   True     True      True   True   True   True   True   True    True   True    True   
+
+   decreas  despit  develop  directli  director  dismiss  display  diverg   doe  dollar  donald  \
+0    False   False     True      True      True    False     True   False  True   False   False   
+1     True   False     True      True      True     True     True   False  True    True    True   
+2     True    True     True      True      True     True     True    True  True    True    True   
+3     True    True     True      True      True     True     True    True  True    True    True   
+
+     dow  drop   dure     e   earn  eastern  economi   edg   educ   end  estim  exceed  exchang  \
+0  False  True  False  True  False     True    False  True  False  True  False    True    False   
+1  False  True  False  True  False     True     True  True  False  True  False    True     True   
+2   True  True   True  True  False     True     True  True   True  True  False    True     True   
+3   True  True   True  True   True     True     True  True   True  True   True    True     True   
+
+   execut  exercis  exjapan  extend   face  fallen  falter    fbm   fear    feb   fell  file  \
+0   False     True    False    True  False   False   False  False  False  False  False  True   
+1    True     True     True    True  False   False    True   True  False  False   True  True   
+2    True     True     True    True   True    True    True   True   True  False   True  True   
+3    True     True     True    True   True    True    True   True   True   True   True  True   
+
+   financi   fire   firm  first   five  follow  forecast  foreign   form   fret  friday  \
+0     True  False  False   True  False   False     False    False  False  False    True   
+1     True   True  False   True  False    True     False    False  False   True    True   
+2     True   True   True   True   True    True     False     True   True   True    True   
+3     True   True   True   True   True    True      True     True   True   True    True   
+
+   furthermor  futur  gainer  gener  give  given    gk  global   goh   gold    got  ground  group  \
+0       False  False   False   True  True   True  True   False  True  False  False    True  False   
+1       False   True   False   True  True   True  True    True  True  False   True    True   True   
+2        True   True    True   True  True   True  True    True  True   True   True    True   True   
+3        True   True    True   True  True   True  True    True  True   True   True    True   True   
+
+     ha  hamzah   hang  happen    hi  high  higher  histor    hit  hold   hon   hong  howev  \
+0  True    True  False   False  True  True   False   False  False  True  True  False   True   
+1  True    True   True   False  True  True   False   False   True  True  True   True   True   
+2  True    True   True    True  True  True    True    True   True  True  True   True   True   
+3  True    True   True    True  True  True    True    True   True  True  True   True   True   
+
+   ichimoku  impli  import  impos  includ  increas  index  indic  industri  institut  interest  \
+0     False  False   False  False   False    False  False  False     False     False      True   
+1     False  False    True   True    True    False   True  False     False     False      True   
+2      True  False    True   True    True     True   True   True      True      True      True   
+3      True   True    True   True    True     True   True   True      True      True      True   
+
+   intermedi  interven  invest  investor    ioi   iran  itslawy  japan  jearajasingam   jone  \
+0      False      True   False     False  False  False     True  False          False  False   
+1      False      True   False      True   True   True     True   True          False  False   
+2       True      True    True      True   True   True     True   True          False   True   
+3       True      True    True      True   True   True     True   True           True   True   
+
+   judgement  judici    ka  keat   klci  klcilink   kong  korea  kospi  kuala  last  latter  \
+0       True    True  True  True  False     False  False  False  False   True  True    True   
+1       True    True  True  True   True      True   True   True   True   True  True    True   
+2       True    True  True  True   True      True   True   True   True   True  True    True   
+3       True    True  True  True   True      True   True   True   True   True  True    True   
+
+   lawsuit  lawyer    led  legal  leong  level  licens   like  local   long   look   loss  lower  \
+0     True    True  False   True  False  False   False  False  False  False  False  False  False   
+1     True    True   True   True  False  False   False  False  False  False  False   True   True   
+2     True    True   True   True   True   True    True   True   True   True   True   True   True   
+3     True    True   True   True   True   True    True   True   True   True   True   True   True   
+
+   lowest  loyalist   ltd  lumpur  macquari  made  maintain  major  make  malaysia  manag  \
+0   False     False  True    True     False  True     False   True  True      True   True   
+1   False      True  True    True     False  True     False   True  True      True   True   
+2    True      True  True    True     False  True      True   True  True      True   True   
+3    True      True  True    True      True  True      True   True  True      True   True   
+
+   mandatori  march  market   maxi   may   meng  metal  metric  michael  middl  midlevel   mike  \
+0       True  False    True  False  True  False  False   False     True  False     False  False   
+1       True   True    True  False  True   True  False   False     True  False     False   True   
+2       True   True    True   True  True   True   True   False     True   True      True   True   
+3       True   True    True   True  True   True   True    True     True   True      True   True   
+
+   million  minor    mix  moder  momentum  month   move   msci  much  name   need  negara  nestl  \
+0     True   True  False  False     False  False  False  False  True  True  False   False  False   
+1     True   True  False   True     False  False   True   True  True  True  False   False   True   
+2     True   True   True   True      True  False   True   True  True  True   True    True   True   
+3     True   True   True   True      True   True   True   True  True  True   True    True   True   
+
+     net  neutral    new  nikkei   nine  nomine  north   nov  oblig  offer  offic    oil  oneyear  \
+0  False    False  False   False  False    True  False  True   True   True  False  False    False   
+1  False    False   True    True  False    True   True  True   True   True   True  False    False   
+2   True    False   True    True  False    True   True  True   True   True   True   True    False   
+3   True     True   True    True   True    True   True  True   True   True   True   True     True   
+
+   orientalbhd  oscil   ounc  outperform  overnight  overturn   palm   past   per  percent  \
+0         True  False  False       False      False      True  False  False  True    False   
+1         True  False  False       False      False      True  False  False  True    False   
+2         True   True   True       False       True      True   True  False  True    False   
+3         True   True   True        True       True      True   True   True  True     True   
+
+   perform  period  petrona   plan  pleas  point  polici  pompeo   prem  premium  presid  press  \
+0    False   False    False  False  False  False   False   False  False     True   False  False   
+1    False   False    False   True  False   True    True    True  False     True    True  False   
+2     True   False     True   True   True   True    True    True  False     True    True   True   
+3     True    True     True   True   True   True    True    True   True     True    True   True   
+
+   previou  previous  price  proceed  public  purchas  purport  purpos  quarter   rais   rang  \
+0    False     False   True     True   False     True     True   False    False  False  False   
+1    False     False   True     True    True     True     True   False    False  False  False   
+2     True     False   True     True    True     True     True    True    False  False  False   
+3     True      True   True     True    True     True     True    True     True   True   True   
+
+    rate  rebound  receiv  recommend   red  regard  reinforc    rel  remain  replac  report  \
+0  False    False   False      False  True   False     False  False    True   False   False   
+1  False    False   False      False  True    True      True  False    True    True    True   
+2   True     True   False       True  True    True      True   True    True    True    True   
+3   True     True    True       True  True    True      True   True    True    True    True   
+
+   reportedli  resist  respond  retail  return  reuter  review    rex   rift  ringgit   risk  \
+0        True   False     True   False   False   False    True  False  False    False  False   
+1        True   False     True   False   False    True    True   True   True    False   True   
+2        True    True     True    True   False    True    True   True   True     True   True   
+3        True    True     True    True    True    True    True   True   True     True   True   
+
+   rm10000  rm145  rm1850  rm205  rm230  rm2376  rm240  rm2432   rm26  rm265  rm299   rm31  rm390  \
+0     True  False   False  False   True   False   True   False  False   True  False  False  False   
+1     True  False   False  False   True   False   True   False  False   True  False  False  False   
+2     True   True    True   True   True    True   True    True   True   True   True   True   True   
+3     True   True    True   True   True    True   True    True   True   True   True   True   True   
+
+   rm391    rm4  rm497  rm514  rm516360  rm543  rm569  rm592  rm645    rm7  rm776   rm94   rose  \
+0  False  False  False  False     False  False  False  False  False  False   True  False  False   
+1  False  False  False  False     False  False  False  False  False  False   True  False  False   
+2   True  False   True  False      True   True  False   True  False  False   True   True  False   
+3   True   True   True   True      True   True   True   True   True   True   True   True   True   
+
+   russia      s  said   sale   saw    sc   sdn   seat  secretari  secur  seek   sell  seller  \
+0   False  False  True  False  True  True  True  False      False   True  True  False   False   
+1    True   True  True  False  True  True  True  False       True   True  True  False   False   
+2    True   True  True  False  True  True  True   True       True   True  True   True    True   
+3    True   True  True   True  True  True  True   True       True   True  True   True    True   
+
+    sen   seng  sentiment   seri  shanghai  share  sharehold  short  shortterm   show  signific  \
+0  True  False      False  False     False   True       True  False      False  False     False   
+1  True   True       True   True      True   True       True  False      False   True     False   
+2  True   True       True   True      True   True       True   True       True   True      True   
+3  True   True       True   True      True   True       True   True       True   True      True   
+
+   sime   sinc   skid  slightli   sole  solid  sought  south  spark   sri  stake  start  state  \
+0  True  False  False     False  False  False    True  False  False  True   True  False  False   
+1  True  False   True     False  False   True    True   True  False  True   True   True   True   
+2  True   True   True      True   True   True    True   True   True  True   True   True   True   
+3  True   True   True      True   True   True    True   True   True  True   True   True   True   
+
+    stay  steel  still  stock  strength  strike  support  takeov   tan  tandem  target  tariff  \
+0  False  False  False   True     False    True    False    True  True   False   False   False   
+1  False  False  False   True     False    True    False    True  True    True   False    True   
+2   True   True   True   True      True    True     True    True  True    True   False    True   
+3   True   True   True   True      True    True     True    True  True    True    True    True   
+
+     tax  technic   teck   term  terri  tham  theedgemarketscom  therefor   thi  threat  three  \
+0  False    False  False  False   True  True              False     False  True   False   True   
+1   True    False   True  False   True  True               True     False  True    True   True   
+2   True     True   True   True   True  True               True      True  True    True   True   
+3   True     True   True   True   True  True               True      True  True    True   True   
+
+   thye  tillerson  time  today   told   tonn   took    top  trade  trail  trend  trump   turn  \
+0  True      False  True  False  False  False  False  False  False  False  False  False  False   
+1  True       True  True   True   True  False   True   True   True  False  False   True  False   
+2  True       True  True   True   True   True   True   True   True  False   True   True   True   
+3  True       True  True   True   True   True   True   True   True   True   True   True   True   
+
+   tussl    two  uncertainti  upgrad     us    use   valu   view  volum    wa  waiv  waiver   wan  \
+0   True  False        False   False  False  False  False  False  False  True  True    True  True   
+1   True  False         True   False   True  False  False  False  False  True  True    True  True   
+2   True   True         True   False   True   True   True   True   True  True  True    True  True   
+3   True   True         True    True   True   True   True   True   True  True  True    True  True   
+
+     war  watch   weak  weaker  wednesday   week   well  withdraw   wong  world  worri  worsen  \
+0  False   True  False   False      False  False  False      True  False  False  False   False   
+1  False   True  False   False       True  False  False      True   True   True   True    True   
+2   True   True   True    True       True   True   True      True   True   True   True    True   
+3   True   True   True    True       True   True   True      True   True   True   True    True   
+
+   would  written   year  yesterday  
+0   True     True  False      False  
+1   True     True  False      False  
+2   True     True  False       True  
+3   True     True   True       True  

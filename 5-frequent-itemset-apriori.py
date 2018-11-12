@@ -74,24 +74,18 @@ for company in companies:
 				vocabulary = tokenize_sentences(sentence)
 				dataset.append(vocabulary)
 				#print(dataset)	
-				
-			# header = 'articles,'
-			# header = header + ",".join(vocabulary) + "\n"
-			# csv.write(header)
 
 			# display true or false in the itemlist
 			te = TransactionEncoder()
-			te_ary = te.fit(dataset).transform(dataset)
-			df = pd.DataFrame(te_ary, columns=te.columns_)
-			print(df)
-
-			print(apriori(df, min_support=0.6))
-
-			# for key_json, value_json in data.items():
-			# 	result = bagofwords(value_json['article'], vocabulary)
-			# 	data = key_json + ","
-			# 	data = data + ",".join(map(str, result.tolist())) + "\n"
-				#csv.write(data)
-
-		#csv.close()
-				
+			te_ary = te.fit_transform(dataset, sparse=True)
+			df = pd.SparseDataFrame(te_ary, columns=te.columns_, default_fill_value=False)
+			frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
+			frequent_itemsets['length'] = frequent_itemsets['itemsets'].apply(lambda x: len(x))
+			data = frequent_itemsets[ (frequent_itemsets['length'] == 2) & (frequent_itemsets['support'] >= 0.6) ]
+			
+			print(data)
+			
+			# TODO
+			# set itemset as vocabulary
+			# search vocabulary (if multiple, use loop) in article
+			# save to csv
